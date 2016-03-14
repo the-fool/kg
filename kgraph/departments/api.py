@@ -9,4 +9,7 @@ class DepartmentList(generics.ListAPIView):
     permission_classes = [
         permissions.AllowAny
     ]
-    
+
+    def get_queryset(self):
+        queryset = Department.objects.all()
+        return queryset
