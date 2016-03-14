@@ -11,9 +11,11 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 
 from kgraph.departments import urls as department_urls
+from kgraph.users import urls as user_urls
 
 api_urls = [
-    url(r'^departments/', include(department_urls))
+    url(r'^departments/', include(department_urls)),
+    url(r'^users/', include(user_urls)),
 ]
 
 urlpatterns = [

@@ -28,7 +28,7 @@
         });
 
         // Api
-        msApiProvider.register('graph.department', ['static/app/data/graphs/department/data.json']);
+        msApiProvider.register('graph.department', ['api/v1/departments/']);
     }
 
 })();

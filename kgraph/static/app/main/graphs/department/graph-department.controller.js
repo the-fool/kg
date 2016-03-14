@@ -11,5 +11,7 @@
 		var vm = this;
 
 		vm.welcomeText = "welcome to department graph";
+		vm.data = DepartmentData;
+
 	}
 })();
