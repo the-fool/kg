@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'djangobower',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_auth',
 )
 
@@ -244,6 +245,10 @@ ADMIN_URL = r'^admin/'
 
 # REST Framework config
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 200
 }

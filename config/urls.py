@@ -15,7 +15,7 @@ from kgraph.users import urls as user_urls
 
 api_urls = [
     url(r'^departments/', include(department_urls)),
-    url(r'^users/', include(user_urls)),
+    url(r'^user/', include(user_urls)),
 ]
 
 urlpatterns = [

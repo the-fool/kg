@@ -2,8 +2,9 @@
 {
   'use strict';
 
-  angular.module('app.core')
-  .service('djangoAuth', function djangoAuth($q, $http, $cookies, $rootScope) {
+  angular
+    .module('app.core')
+    .service('djangoAuth', function djangoAuth($q, $http, $cookies, $rootScope) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = {
       /* START CUSTOMIZATION HERE */
@@ -208,4 +209,4 @@
     }
     return service;
   });
-})
+})();

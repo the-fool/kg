@@ -11,13 +11,6 @@
     /** @ngInject */
     function config(msNavigationServiceProvider)
     {
-        // Navigation
-      /*  msNavigationServiceProvider.saveItem('dashboards', {
-            title : 'Dashboards',
-            icon  : 'icon-tile-four',
-            weight: 1
-        });
-*/
         msNavigationServiceProvider.saveItem('student', {
             title: 'My Dashboard',
             icon  : 'icon-tile-four',

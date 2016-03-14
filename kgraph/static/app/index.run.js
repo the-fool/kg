@@ -9,6 +9,7 @@
     /** @ngInject */
     function runBlock($rootScope, $timeout, $state)
     {
+
         // Activate loading indicator
         var stateChangeStartEvent = $rootScope.$on('$stateChangeStart', function ()
         {
