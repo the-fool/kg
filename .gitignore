@@ -66,3 +66,6 @@ tests/.hitch
 
 # MailHog binary
 mailhog
+
+# Gulp dev builds
+.tmp/
