@@ -18,6 +18,9 @@
             'app.quick-panel',
 
             // Dashboard
-            'app.dashboards'
+            'app.dashboards',
+
+            // Graphs
+            'app.graphs',
         ]);
 })();
