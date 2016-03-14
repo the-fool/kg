@@ -46,5 +46,7 @@ redis>=2.10.0
 
 celery==3.1.21
 
-
-# Your custom requirements go here
+djangorestframework==3.3.3
+Markdown==2.6.5
+django-filter==0.13.0
+django-rest-auth==0.7.0

@@ -40,12 +40,14 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     'djangobower',
+    'rest_framework',
+    'rest_auth',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'kgraph.users',  # custom users app
-    # Your stuff: custom apps go here
+    'kgraph.departments',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
