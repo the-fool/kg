@@ -82,13 +82,13 @@
           'data' :data
         });
       },
-      'login': function(username,password){
+      'login': function(email,password){
         var djangoAuth = this;
         return this.request({
           'method': "POST",
           'url': "/login/",
           'data':{
-            'username':username,
+            'email':email,
             'password':password
           }
         }).then(function(data){
@@ -97,7 +97,6 @@
             $cookies.token = data.key;
           }
           djangoAuth.authenticated = true;
-          djangoAuth.user = data;
           $rootScope.$broadcast("djangoAuth.logged_in", data);
         });
       },
@@ -138,13 +137,15 @@
       ***/
       'profile': function(force){
         force = force || false;
-        if (this.user == null || force) {
+        var djangoAuth = this;
+        if (djangoAuth.user == null || force) {
           return this.request({
             'method': "GET",
             'url': "/user/"
           });
         } else {
-          return this.user;
+          console.log('returning cached user');
+          return $q(function(resolve){resolve(djangoAuth.user);});
         }
       },
       'updateProfile': function(data){

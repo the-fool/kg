@@ -115,15 +115,18 @@
          */
         function logout()
         {
-            console.log('logout');
-            djangoAuth.logout().then(function() {
-              $rootScope.state.go('department');
-            });
+            djangoAuth.logout()
+              .then(
+                function (data) {
+                  // success
+                },
+                function (err) {
+                  // on error
+                }
+              );
         }
         function login()
         {
-          console.log('login');
-          console.log($rootScope);
           $rootScope.state.go('app.pages_auth_login');
         }
         /**

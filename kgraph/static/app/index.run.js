@@ -47,18 +47,20 @@
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
           $rootScope.authenticated = false;
+          $state.go('app.graphs_department');
         });
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
           $rootScope.authenticated = true;
           djangoAuth.profile().then(function(data) {
             $rootScope.user = data;
+            $state.go('app.dashboards_student');
           });
         });
         // If the user attempts to access a restricted page, redirect them back to the main page.
         $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection){
           console.error("Unable to change routes.  Error: ", rejection)
-          $state.go('/');
+          $state.go('home');
         });
 
 

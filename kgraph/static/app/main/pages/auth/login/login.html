@@ -21,7 +21,7 @@
             <div class="title" translate="LOGIN.TITLE">Log in to your account</div>
             <div class="description" translate="LOGIN.DESCRIPTION">Sed mollis velit facilisis facilisis viverra</div>
 
-            <form name="loginForm" novalidate>
+            <form name="loginForm" novalidate ng-submit="vm.login()">
                 <md-input-container class="md-block" md-no-float>
                     <input type="email" name="email" ng-model="vm.form.email" placeholder="Email"
                            translate translate-attr-placeholder="LOGIN.EMAIL"
@@ -56,12 +56,19 @@
                     <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color"
                        translate="LOGIN.FORGOT_PASSWORD">Forgot Password?</a>
                 </div>
-
-                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
+                <div layout="row" layout-align="center center">
+                <md-button type="submit" class="md-raised md-accent submit-button"
+                           ng-hide="vm.progress || vm.authenticated" aria-label="LOG IN"
                            ng-disabled="loginForm.$invalid || loginForm.$pristine"
                            translate="LOGIN.LOG_IN" translate-attr-aria-label="LOGIN.LOG_IN">
                     LOG IN
                 </md-button>
+
+                  <md-progress-circular md-mode="indeterminate" ng-show="vm.progress" class="md-warn md-hue-3">
+                  </md-progress-circular>
+                  <md-icon md-font-icon="material-icons"></md-icon>
+
+                </div>
             </form>
 
             <div class="separator">

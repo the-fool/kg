@@ -7,13 +7,38 @@
         .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function LoginController()
+    function LoginController(djangoAuth)
     {
-        // Data
+        var vm = this;
 
-        // Methods
+        vm.progress = false;
+        vm.authenticated = false;
+        vm.login = login;
+        vm.form = {'email':'', 'password':''};
 
-        //////////
+        function login()
+        {
+          vm.progress = true;
+
+          djangoAuth.login(
+            vm.form.email,
+            vm.form.password
+          )
+          .then(
+            function (data) {
+              // success
+              vm.authenticated = true;
+            },
+            function (error) {
+              // on error
+            }
+          )
+          .finally(
+            function() {
+              vm.progress = false;
+            }
+          );
+        }
     }
 
 })();
