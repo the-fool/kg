@@ -22,5 +22,8 @@
 
             // Graphs
             'app.graphs',
+
+            // Full pages
+            'app.pages',
         ]);
 })();

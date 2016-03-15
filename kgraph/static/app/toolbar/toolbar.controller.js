@@ -7,7 +7,7 @@
         .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast)
+    function ToolbarController($rootScope, $mdSidenav, $translate, $mdToast, djangoAuth)
     {
         var vm = this;
 
@@ -68,6 +68,7 @@
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.logout = logout;
+        vm.login = login;
         vm.changeLanguage = changeLanguage;
         vm.setUserStatus = setUserStatus;
         vm.toggleHorizontalMobileMenu = toggleHorizontalMobileMenu;
@@ -114,9 +115,17 @@
          */
         function logout()
         {
-            // Do logout here..
+            console.log('logout');
+            djangoAuth.logout().then(function() {
+              $rootScope.state.go('department');
+            });
         }
-
+        function login()
+        {
+          console.log('login');
+          console.log($rootScope);
+          $rootScope.state.go('app.pages_auth_login');
+        }
         /**
          * Change Language
          */

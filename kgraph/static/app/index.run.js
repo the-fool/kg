@@ -40,6 +40,9 @@
         // Init the auth service
         djangoAuth.authenticationStatus(true).then(function(data) {
           $rootScope.authenticated = true;
+          djangoAuth.profile().then(function(data) {
+            $rootScope.user = data;
+          });
         });
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
@@ -48,6 +51,9 @@
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
           $rootScope.authenticated = true;
+          djangoAuth.profile().then(function(data) {
+            $rootScope.user = data;
+          });
         });
         // If the user attempts to access a restricted page, redirect them back to the main page.
         $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection){

@@ -97,7 +97,7 @@
             $cookies.token = data.key;
           }
           djangoAuth.authenticated = true;
-          user = data;
+          djangoAuth.user = data;
           $rootScope.$broadcast("djangoAuth.logged_in", data);
         });
       },
@@ -110,7 +110,7 @@
           delete $http.defaults.headers.common.Authorization;
           delete $cookies.token;
           djangoAuth.authenticated = false;
-          user = null;
+          djangoAuth.user = null;
           $rootScope.$broadcast("djangoAuth.logged_out");
         });
       },
