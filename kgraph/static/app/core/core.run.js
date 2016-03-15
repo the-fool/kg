@@ -9,8 +9,7 @@
     /** @ngInject */
     function runBlock(msUtils, fuseGenerator, fuseConfig, djangoAuth)
     {
-        // Init the auth service
-        djangoAuth.initialize('/rest-auth', true);
+
         /**
          * Generate extra classes based on registered themes so we
          * can use same colors with non-angular-material elements

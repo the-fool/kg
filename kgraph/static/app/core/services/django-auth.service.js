@@ -10,13 +10,14 @@
       /* START CUSTOMIZATION HERE */
       // Change this to point to your Django REST Auth API
       // e.g. /api/rest-auth  (DO NOT INCLUDE ENDING SLASH)
-      'API_URL': '/api/v1/rest-auth',
+      'API_URL': '/rest-auth',
       // Set use_session to true to use Django sessions to store security token.
       // Set use_session to false to store the security token locally and transmit it as a custom header.
       'use_session': true,
       /* END OF CUSTOMIZATION */
       'authenticated': null,
       'authPromise': null,
+      'user': null,
       'request': function(args) {
         // Let's retrieve the token from the cookie, if available
         if($cookies.token){
@@ -96,6 +97,7 @@
             $cookies.token = data.key;
           }
           djangoAuth.authenticated = true;
+          user = data;
           $rootScope.$broadcast("djangoAuth.logged_in", data);
         });
       },
@@ -108,6 +110,7 @@
           delete $http.defaults.headers.common.Authorization;
           delete $cookies.token;
           djangoAuth.authenticated = false;
+          user = null;
           $rootScope.$broadcast("djangoAuth.logged_out");
         });
       },
@@ -130,11 +133,19 @@
           }
         });
       },
-      'profile': function(){
-        return this.request({
-          'method': "GET",
-          'url': "/user/"
-        });
+      /***
+      Set 'force' to ignore the cached user object and fetch afresh
+      ***/
+      'profile': function(force){
+        force = force || false;
+        if (this.user == null || force) {
+          return this.request({
+            'method': "GET",
+            'url': "/user/"
+          });
+        } else {
+          return this.user;
+        }
       },
       'updateProfile': function(data){
         return this.request({
@@ -172,7 +183,7 @@
           this.authPromise = this.request({
             'method': "GET",
             'url': "/user/"
-          })
+          });
         }
         var da = this;
         var getAuthStatus = $q.defer();

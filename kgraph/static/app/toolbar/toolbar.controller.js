@@ -86,6 +86,7 @@
 
             // Get the selected language directly from angular-translate module setting
             vm.selectedLanguage = vm.languages[$translate.preferredLanguage()];
+
         }
 
 

@@ -22,7 +22,17 @@
                 DashboardData: function (msApi)
                 {
                     return msApi.resolve('dashboard.student@get');
-                }
+                },
+                Profile: function($q, djangoAuth)
+                {
+                  return djangoAuth
+                    .authenticationStatus(true)
+                    .then(function() {
+                      return djangoAuth.profile();
+                    }, function() {
+                      return undefined;
+                    });
+                },
             },
             bodyClass: 'dashboard-student'
         });

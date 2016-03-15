@@ -23,10 +23,6 @@
                 {
                     return msApi.resolve('graph.department@get');
                 },
-                Authenticated: function (djangoAuth)
-                {
-                    return djangoAuth.authenticationStatus();
-                },
             },
             bodyClass: 'graph-department'
         });

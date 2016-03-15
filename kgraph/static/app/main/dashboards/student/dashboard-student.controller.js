@@ -1,4 +1,4 @@
-(function() 
+(function()
 {
 	'use strict';
 
@@ -7,9 +7,10 @@
 		.controller('DashboardStudentController', DashboardStudentController);
 
 	/** @ngInject */
-	function DashboardStudentController($scope, DashboardData) {
+	function DashboardStudentController($scope, DashboardData, Profile, djangoAuth) {
 		var vm = this;
-
+		console.log('ctrl', Profile);
+		vm.profile = Profile;
 		vm.welcomeText = "welcome to student";
 	}
-})();	
+})();
