@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'kgraph.users',  # custom users app
     'kgraph.departments',
+    'kgraph.courses',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
