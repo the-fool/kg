@@ -3,9 +3,9 @@ from kgraph.users.models import User
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        users = ['One', 'Two', 'Three', 'Four', 'Five']
-
         User.objects.all().delete()
+
+        users = ['One', 'Two', 'Three', 'Four', 'Five']
         for u in users:
             new_user = User(username=u, email="{}@example.com".format(u))
             new_user.set_password('password')

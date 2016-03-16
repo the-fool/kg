@@ -33,14 +33,26 @@
 
     /** @ngInject */
     function runBlock(djangoAuth, msNavigationService) {
-      console.log('runnin', djangoAuth.profile());
-      // Navigation
-      msNavigationService.saveItem('department', {
-          title: 'Explore',
+      /** Set the appropriate department affiliations in quick-nav for a user */
+      djangoAuth.profile().then(function(data) {
+        // Navigation
+        var affiliations = data.affiliations ? data.affiliations : null;
+
+        msNavigationService.saveItem('affiliations', {
+          title : 'SCHOOLS',
           icon  : 'icon-tile-four',
-          state: 'app.department',
           weight: 1
+        });
+
+        msNavigationService.saveItem('affiliations.department', {
+            title: 'Explore',
+            state: 'app.department',
+            weight: 1,
+            stateParams: {deptId: affiliations},
+        });
+
       });
+
 
     }
 
