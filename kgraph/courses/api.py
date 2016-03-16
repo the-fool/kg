@@ -11,7 +11,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
     ]
 
     def get_queryset(self, *args, **kwargs):
-        return Course.objects.all()
+        return Course.objects.select_related('department').all()
 
 class CourseList(generics.ListCreateAPIView):
     model = Course
@@ -21,4 +21,5 @@ class CourseList(generics.ListCreateAPIView):
     ]
 
     def get_queryset(self, *args, **kwargs):
-        return Course.objects.all()
+        return Course.objects.select_related('department').all()
+        #return Course.objects.all()
