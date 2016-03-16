@@ -8,7 +8,6 @@ from .serializers import UserSerializer, CreateUserSerializer
 User = get_user_model()
 
 class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
@@ -17,7 +16,15 @@ class UserList(generics.ListCreateAPIView):
         self.permission_classes = (AllowAny,)
         return super(UserList, self).create(request, *args, **kwargs)
 
+    def get_queryset(self):
+        q = User.objects.prefetch_related('affiliations').all()
+        return q
+
 class UserDetail(generics.RetrieveUpdateAPIView):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
+    lookup_field = 'username'
+
+    def get_queryset(self):
+        q = User.objects.prefetch_related('affiliations').all()
+        return q
