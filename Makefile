@@ -5,3 +5,4 @@ syncdb:
 fixtures:
 	python ./manage.py create_departments
 	python ./manage.py create_users
+	python ./manage.py create_courses

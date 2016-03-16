@@ -12,10 +12,12 @@ from django.views.generic.base import RedirectView
 
 from kgraph.departments import urls as department_urls
 from kgraph.users import urls as user_urls
+from kgraph.courses import urls as course_urls
 
 api_urls = [
-    url(r'^departments/', include(department_urls)),
+    url(r'^department/', include(department_urls)),
     url(r'^user/', include(user_urls)),
+    url(r'^course/', include(course_urls))
 ]
 
 urlpatterns = [
