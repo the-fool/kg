@@ -193,14 +193,15 @@
           if(this.authenticated == false && restrict){
             getAuthStatus.reject("User is not logged in.");
           }else{
-            getAuthStatus.resolve();
+            getAuthStatus.resolve(da.user);
           }
         }else{
           // There isn't a stored value, or we're forcing a request back to
           // the API to get the authentication status.
-          this.authPromise.then(function(){
+          this.authPromise.then(function(data){
             da.authenticated = true;
-            getAuthStatus.resolve();
+            da.user = data;
+            getAuthStatus.resolve(da.user);
           },function(){
             da.authenticated = false;
             if(restrict){

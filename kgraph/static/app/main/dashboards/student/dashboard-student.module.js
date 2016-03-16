@@ -27,8 +27,8 @@
                 {
                   return djangoAuth
                     .authenticationStatus(true)
-                    .then(function() {
-                      return djangoAuth.profile();
+                    .then(function(data) {
+                      return data;
                     }, function() {
                       return undefined;
                     });
