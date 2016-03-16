@@ -26,8 +26,9 @@
                 Profile: function($q, djangoAuth)
                 {
                   return djangoAuth
-                    .authenticationStatus(true)
+                    .authenticationStatus(false, true)
                     .then(function(data) {
+                      console.log('resolved', data);
                       return data;
                     }, function() {
                       return undefined;

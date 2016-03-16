@@ -38,7 +38,7 @@
         // Auth
         $rootScope.authenticated = false;
         // Init the auth service
-        djangoAuth.authenticationStatus(true).then(function(data) {
+        djangoAuth.authenticationStatus(false, false).then(function(data) {
           $rootScope.authenticated = true;
           djangoAuth.profile().then(function(data) {
             $rootScope.user = data;
@@ -47,14 +47,14 @@
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
           $rootScope.authenticated = false;
-          $state.go('app.graphs_department');
+          $state.go('app.department');
         });
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
           $rootScope.authenticated = true;
           djangoAuth.profile().then(function(data) {
             $rootScope.user = data;
-            $state.go('app.dashboards_student');
+            $state.go('app.dashboards_student', {}, {reload: true});
           });
         });
         // If the user attempts to access a restricted page, redirect them back to the main page.

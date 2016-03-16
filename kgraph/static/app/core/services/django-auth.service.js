@@ -193,6 +193,7 @@
           if(this.authenticated == false && restrict){
             getAuthStatus.reject("User is not logged in.");
           }else{
+            console.log('hier');
             getAuthStatus.resolve(da.user);
           }
         }else{
