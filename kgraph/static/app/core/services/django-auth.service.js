@@ -180,7 +180,7 @@
         // Set force to true to ignore stored value and query API
         restrict = restrict || false;
         force = force || false;
-        if(this.authPromise == null || force){
+        if(this.user === null || this.authPromise == null || force){
           this.authPromise = this.request({
             'method': "GET",
             'url': "/user/"
@@ -188,12 +188,11 @@
         }
         var da = this;
         var getAuthStatus = $q.defer();
-        if(this.authenticated != null && !force){
+        if(this.user !== null && this.authenticated != null && !force){
           // We have a stored value which means we can pass it back right away.
           if(this.authenticated == false && restrict){
             getAuthStatus.reject("User is not logged in.");
           }else{
-            console.log('hier');
             getAuthStatus.resolve(da.user);
           }
         }else{
