@@ -36,7 +36,7 @@
       /** Set the appropriate department affiliations in quick-nav for a user */
       djangoAuth.profile().then(function(data) {
         // Navigation
-        var affiliations = data.affiliations ? data.affiliations : null;
+        var affiliations = data.affiliations ? data.affiliations : [];
 
         msNavigationService.saveItem('affiliations', {
           title : 'SCHOOLS',
@@ -44,11 +44,14 @@
           weight: 1
         });
 
-        msNavigationService.saveItem('affiliations.department', {
-            title: 'Explore',
-            state: 'app.department',
-            weight: 1,
-            stateParams: {deptId: affiliations},
+        affiliations.forEach(function(element, index) {
+            console.log('adding');
+            msNavigationService.saveItem('affiliations.department-' + index, {
+                title: 'Dep. ' + index,
+                state: 'app.department',
+                weight: 1,
+                stateParams: {deptId: element},
+            });
         });
 
       });
