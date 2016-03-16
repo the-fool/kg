@@ -21,4 +21,8 @@ class CourseList(generics.ListCreateAPIView):
     ]
 
     def get_queryset(self, *args, **kwargs):
-        return Course.objects.select_related('department').all()
+        return (Course.objects
+                     .select_related('department')
+                     .prefetch_related('aft')
+                     .all()
+               )

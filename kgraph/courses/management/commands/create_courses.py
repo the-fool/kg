@@ -7,7 +7,7 @@ class Command(BaseCommand):
         Course.objects.all().delete()
 
         departments = list(Department.objects.all())
-        courses = ['Intro', 'Advanced', 'Intermediate', 'Advanced II', 'Remedial']
+        courses = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight']
         for d in departments:
             for c in courses:
                 Course.objects.create(title=c, department=d)
