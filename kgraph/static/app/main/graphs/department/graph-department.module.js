@@ -11,7 +11,7 @@
     {
         // State
         $stateProvider.state('app.graphs_department', {
-            url      : '/graph-department',
+            url      : '/department/',
             views    : {
                 'content@app': {
                     templateUrl: 'static/app/main/graphs/department/graph-department.html',

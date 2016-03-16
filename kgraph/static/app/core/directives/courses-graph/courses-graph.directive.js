@@ -2,16 +2,16 @@
 {
   'use strict';
   angular
-    .module('app.graphs.department')
-    .directive('departmentCoursesGraph', departmentCoursesGraph);
+    .module('app.core')
+    .directive('coursesGraph', coursesGraph);
 
   /** @ngInject */
-  function departmentCoursesGraph() {
+  function coursesGraph() {
 
     return {
       restrict: 'E',
       replace: false,
-      scope: {data: '=chartData'},
+      scope: {data: '=graphData'},
       link: link
     };
 

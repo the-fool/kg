@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular
-		.module('app.graphs.department')
+		.module('app.department')
 		.controller('GraphDepartmentController', GraphDepartmentController);
 
 	/** @ngInject */

@@ -20,8 +20,8 @@
             // Dashboard
             'app.dashboards',
 
-            // Graphs
-            'app.graphs',
+            // Department
+            'app.department',
 
             // Full pages
             'app.pages',
