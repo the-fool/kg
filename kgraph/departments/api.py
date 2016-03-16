@@ -6,6 +6,10 @@ from .serializers import DepartmentSerializer
 from ..courses.models import Course
 from ..courses.serializers import CourseSerializer
 
+class DepartmentDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Department
+    
+
 class DepartmentList(generics.ListAPIView):
     model = Department
     serializer_class = DepartmentSerializer

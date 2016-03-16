@@ -4,14 +4,14 @@
 
     angular
         .module('app.department', [])
-        .config(config);
+        .config(config).run(runBlock);
 
     /** @ngInject */
     function config($stateProvider, msApiProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.department', {
-            url      : '/department',
+            url      : '/department/{deptId}',
             views    : {
                 'content@app': {
                     templateUrl: 'static/app/main/department/department.html',
@@ -27,16 +27,21 @@
             bodyClass: 'app-department'
         });
 
-        // Navigation
-        msNavigationServiceProvider.saveItem('department', {
-            title: 'Explore',
-            icon  : 'icon-tile-four',
-            state: 'app.department',
-            weight: 1
-        });
-
         // Api
-        msApiProvider.register('app.department', ['api/v1/department/']);
+        msApiProvider.register('app.department', ['api/v1/department/:id']);
+    }
+
+    /** @ngInject */
+    function runBlock(djangoAuth, msNavigationService) {
+      console.log('runnin', djangoAuth.profile());
+      // Navigation
+      msNavigationService.saveItem('department', {
+          title: 'Explore',
+          icon  : 'icon-tile-four',
+          state: 'app.department',
+          weight: 1
+      });
+
     }
 
 })();
