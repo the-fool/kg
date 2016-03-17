@@ -8,7 +8,15 @@ from ..courses.serializers import CourseSerializer
 
 class DepartmentDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Department
-    
+    serializer_class = DepartmentSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
+    def get_queryset(self):
+        queryset = Department.objects.all()
+        return queryset
+
 
 class DepartmentList(generics.ListAPIView):
     model = Department

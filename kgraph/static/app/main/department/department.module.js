@@ -19,16 +19,21 @@
                 }
             },
             resolve  : {
-                DepartmentData: function ($stateParams, msApi)
+                'DepartmentDetailData': function ($stateParams, msApi)
                 {
-                      msApi.resolve('app.department@get', {id : $stateParams.deptId});
+                    return msApi.resolve('app.department@get', {id : $stateParams.deptId});
                 },
+                'DepartmentCoursesData': function ($stateParams, msApi)
+                {
+                    return msApi.resolve('app.department-courses@get', {id : $stateParams.deptId});
+                }
             },
             bodyClass: 'app-department'
         });
 
         // Api
-        msApiProvider.register('app.department', ['api/v1/department/:id']);
+        msApiProvider.register('app.department', ['api/v1/department/:id/']);
+        msApiProvider.register('app.department-courses', ['api/v1/department/:id/courses/']);
     }
 
     /** @ngInject */
@@ -45,7 +50,6 @@
         });
 
         affiliations.forEach(function(element, index) {
-            console.log('adding');
             msNavigationService.saveItem('affiliations.department-' + index, {
                 title: 'Dep. ' + index,
                 state: 'app.department',

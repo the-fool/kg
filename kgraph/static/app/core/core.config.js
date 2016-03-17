@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($ariaProvider, $logProvider, msScrollConfigProvider, $translateProvider, fuseConfigProvider)
+    function config($ariaProvider, $logProvider, msScrollConfigProvider, $translateProvider, fuseConfigProvider, $resourceProvider)
     {
         // Enable debug logging
         $logProvider.debugEnabled(true);
@@ -43,6 +43,8 @@
         msScrollConfigProvider.config({
             wheelPropagation: true
         });
+
+        $resourceProvider.defaults.stripTrailingSlashes = false;
 
         /*eslint-enable */
     }
