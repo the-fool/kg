@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from ..departments.serializers import DepartmentSerializer
+
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
-
+    affiliations = DepartmentSerializer(many=True)
     class Meta:
         model = User
         fields = ('id', 'username', 'email','affiliations')

@@ -51,10 +51,10 @@
 
         affiliations.forEach(function(element, index) {
             msNavigationService.saveItem('affiliations.department-' + index, {
-                title: 'Dep. ' + index,
+                title: element.title,
                 state: 'app.department',
                 weight: 1,
-                stateParams: {deptId: element},
+                stateParams: {deptId: element.id},
             });
         });
 
