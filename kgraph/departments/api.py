@@ -4,7 +4,7 @@ from .models import Department
 from .serializers import DepartmentSerializer
 
 from ..courses.models import Course
-from ..courses.serializers import CourseSerializer
+from ..courses.serializers import CourseEdgeSerializer
 
 class DepartmentDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Department
@@ -31,7 +31,7 @@ class DepartmentList(generics.ListAPIView):
 
 class DepartmentCourseList(generics.ListAPIView):
     model = Course
-    serializer_class = CourseSerializer
+    serializer_class = CourseEdgeSerializer
     permission_classes = [
         permissions.AllowAny
     ]

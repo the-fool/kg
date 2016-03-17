@@ -15,4 +15,12 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('id', 'title', 'department', 'fore')
+        fields = ('id', 'title', 'department')
+
+class CourseEdgeSerializer(serializers.ModelSerializer):
+    fore = EdgeSerializer(many=True)
+    aft = EdgeSerializer(many=True)
+    
+    class Meta:
+        model = Course
+        fields = ('id', 'title', 'fore', 'aft')
