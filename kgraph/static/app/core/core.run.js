@@ -7,7 +7,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock(msUtils, fuseGenerator, fuseConfig, djangoAuth)
+    function runBlock(msUtils, fuseGenerator, fuseConfig)
     {
 
         /**
