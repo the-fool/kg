@@ -39,7 +39,6 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-    'djangobower',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -188,10 +187,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
 )
-
-BOWER_COMPONENTS_ROOT = str(ROOT_DIR('bower_components'))
 
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -11,7 +11,6 @@ class EdgeSerializer(serializers.ModelSerializer):
 
 class CourseSerializer(serializers.ModelSerializer):
     department = DepartmentSerializer()
-    fore = EdgeSerializer(many=True)
 
     class Meta:
         model = Course
@@ -20,7 +19,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class CourseEdgeSerializer(serializers.ModelSerializer):
     fore = EdgeSerializer(many=True)
     aft = EdgeSerializer(many=True)
-    
+
     class Meta:
         model = Course
         fields = ('id', 'title', 'fore', 'aft')
