@@ -38,7 +38,7 @@
         // Auth
         $rootScope.authenticated = false;
         // Init the auth service
-        djangoAuth.authenticationStatus(false, false).then(function(data) {
+        djangoAuth.authenticationStatus(true, false).then(function(data) {
           $rootScope.authenticated = true;
           djangoAuth.profile().then(function(data) {
             $rootScope.user = data;
