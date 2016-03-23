@@ -32,8 +32,8 @@
         });
 
         // Api
-        msApiProvider.register('app.department', ['api/v1/department/:id/']);
-        msApiProvider.register('app.department-courses', ['api/v1/department/:id/courses/']);
+        msApiProvider.register('app.department', ['api/v1/departments/:id/']);
+        msApiProvider.register('app.department-courses', ['api/v1/departments/:id/courses/']);
     }
 
     /** @ngInject */
