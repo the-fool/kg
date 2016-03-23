@@ -17,6 +17,7 @@
       /* END OF CUSTOMIZATION */
       'authenticated': null,
       'authPromise': null,
+      'userCache' : null,
       'request': function(args) {
         // Let's retrieve the token from the cookie, if available
         if($cookies.token){
@@ -96,7 +97,10 @@
             $cookies.token = data.key;
           }
           djangoAuth.authenticated = true;
-          $rootScope.$broadcast("djangoAuth.logged_in", data);
+          djangoAuth.profile().then(function (data) {
+            djangoAuth.userCache = data;
+            $rootScope.$broadcast("djangoAuth.logged_in", $cookies.token);
+          });
         });
       },
       'logout': function(){
@@ -108,6 +112,7 @@
           delete $http.defaults.headers.common.Authorization;
           delete $cookies.token;
           djangoAuth.authenticated = false;
+          djangoAuth.userCache = null;
           $rootScope.$broadcast("djangoAuth.logged_out");
         });
       },
@@ -134,10 +139,15 @@
       Set 'force' to ignore the cached user object and fetch afresh
       ***/
       'profile': function(){
+        var da = this;
+        if (da.userCache !== null) {
+          return $q(function(resolve){resolve(da.userCache);});
+        } else {
           return this.request({
             'method': "GET",
             'url': "/user/"
           });
+        }
       },
       'updateProfile': function(data){
         return this.request({
@@ -182,6 +192,7 @@
         if(this.authenticated != null && !force){
           // We have a stored value which means we can pass it back right away.
           if(this.authenticated == false && restrict){
+            da.userCache = null; // unnecessary? just for safety.
             getAuthStatus.reject("User is not logged in.");
           }else{
             getAuthStatus.resolve();
@@ -190,10 +201,12 @@
           // There isn't a stored value, or we're forcing a request back to
           // the API to get the authentication status.
           this.authPromise.then(function(data){
+            da.userCache = data;
             da.authenticated = true;
             getAuthStatus.resolve();
           },function(){
             da.authenticated = false;
+            da.userCache = null; // unnecessary? just for safety.
             if(restrict){
               getAuthStatus.reject("User is not logged in.");
             }else{

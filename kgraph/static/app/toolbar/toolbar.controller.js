@@ -88,6 +88,20 @@
             // Get the selected language directly from angular-translate module setting
             vm.selectedLanguage = vm.languages[$translate.preferredLanguage()];
 
+            // Get the user data object
+            djangoAuth
+              .authenticationStatus()
+              .then(function()
+              {
+                return djangoAuth.profile();
+              }, function(error) {
+                  vm.user = null;
+              })
+              .then(function(userData) {
+                console.log(userData);
+                vm.user = userData;
+              });
+
         }
 
 
