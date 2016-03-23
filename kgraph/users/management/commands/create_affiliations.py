@@ -7,8 +7,9 @@ class Command(BaseCommand):
         users = User.objects.all()
         departments = Department.objects.all()
 
-        for u in users:
-            m = Membership(user=u, department=departments[0])
+        for i, u in enumerate(users):
+            d_mod = len(departments)
+            m = Membership(user=u, department=departments[i % d_mod])
             m.save()
-            m = Membership(user=u, department=departments[1])
+            m = Membership(user=u, department=departments[(i + 1) % d_mod])
             m.save()

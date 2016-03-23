@@ -48,11 +48,11 @@
                 $rootScope.authenticated = false;
               }
             );
-      
+
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
           $rootScope.authenticated = false;
-          $state.go('app.department');
+          $state.go('app.pages_auth_login');
         });
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
@@ -62,7 +62,7 @@
         // If the user attempts to access a restricted page, redirect them back to the main page.
         $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection){
           console.error("Unable to change routes.  Error: ", rejection)
-          $state.go('home');
+          $state.go('pages_auth_login');
         });
 
 

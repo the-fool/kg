@@ -4,6 +4,6 @@ from kgraph.departments.models import Department
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         Department.objects.all().delete()
-        departments = ['Computer Science', 'Mathematics']
+        departments = ['Computer Science', 'Mathematics', 'Philosophy', 'English']
         for d in departments:
             Department.objects.create(title=d)

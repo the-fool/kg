@@ -17,8 +17,8 @@ class Course(models.Model):
 
 class Edge(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    whence = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING, related_name="fore")
-    whither = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING, related_name="aft")
+    whence = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name="fore")
+    whither = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name="aft")
 
     class Meta:
         unique_together = ('whence', 'whither')
