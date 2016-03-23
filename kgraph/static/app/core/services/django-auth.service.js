@@ -17,7 +17,6 @@
       /* END OF CUSTOMIZATION */
       'authenticated': null,
       'authPromise': null,
-      'user': null,
       'request': function(args) {
         // Let's retrieve the token from the cookie, if available
         if($cookies.token){
@@ -109,7 +108,6 @@
           delete $http.defaults.headers.common.Authorization;
           delete $cookies.token;
           djangoAuth.authenticated = false;
-          djangoAuth.user = null;
           $rootScope.$broadcast("djangoAuth.logged_out");
         });
       },
@@ -135,18 +133,11 @@
       /***
       Set 'force' to ignore the cached user object and fetch afresh
       ***/
-      'profile': function(force){
-        force = force || false;
-        var djangoAuth = this;
-        if (djangoAuth.user == null || force) {
+      'profile': function(){
           return this.request({
             'method': "GET",
             'url': "/user/"
           });
-        } else {
-          console.log('returning cached user');
-          return $q(function(resolve){resolve(djangoAuth.user);});
-        }
       },
       'updateProfile': function(data){
         return this.request({
@@ -188,20 +179,19 @@
         }
         var da = this;
         var getAuthStatus = $q.defer();
-        if(this.user !== null && this.authenticated != null && !force){
+        if(this.authenticated != null && !force){
           // We have a stored value which means we can pass it back right away.
           if(this.authenticated == false && restrict){
             getAuthStatus.reject("User is not logged in.");
           }else{
-            getAuthStatus.resolve(da.user);
+            getAuthStatus.resolve();
           }
         }else{
           // There isn't a stored value, or we're forcing a request back to
           // the API to get the authentication status.
           this.authPromise.then(function(data){
             da.authenticated = true;
-            da.user = data;
-            getAuthStatus.resolve(da.user);
+            getAuthStatus.resolve();
           },function(){
             da.authenticated = false;
             if(restrict){

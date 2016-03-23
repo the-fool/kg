@@ -23,14 +23,14 @@
                 {
                     return msApi.resolve('dashboard.student@get');
                 },
-                Profile: function(djangoAuth, $state)
+                Profile: function(djangoAuth, $state, $rootScope)
                 {
                   return djangoAuth
                     .authenticationStatus(true, false)
                     .then(
-                      function(data) {
-                        console.log('resolved', data);
-                        return data;
+                      function() {
+                        // successfully logged in -- return user object
+                        return djangoAuth.profile().then(function(data) {return data;});
                       },
                       function(error) {
                         console.log(error)

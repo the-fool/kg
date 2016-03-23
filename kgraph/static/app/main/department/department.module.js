@@ -39,37 +39,34 @@
     /** @ngInject */
     function runBlock(djangoAuth, msNavigationService) {
 
-
       /** Set the appropriate department affiliations in quick-nav for a user */
-      djangoAuth.authenticationStatus()
-        .then(
-          function(data) {
-            // if data is undefined, then no user is authenticated
-            if (data !== undefined) {
-              // Add user's personal affiliations to navigation
-              var affiliations = data.affiliations ? data.affiliations : [];
-              msNavigationService.saveItem('affiliations', {
-                title : 'MY SCHOOLS',
-                icon  : 'icon-tile-four',
-                weight: 1
-              });
+      djangoAuth
+        .authenticationStatus(true)
+        .then(function()
+        {
+            return djangoAuth.profile();
+        })
+        .then(function(data)
+        {
+          // Add user's personal affiliations to navigation
+          var affiliations = data.affiliations ? data.affiliations : [];
+          msNavigationService.saveItem('affiliations', {
+            title : 'MY SCHOOLS',
+            icon  : 'icon-tile-four',
+            weight: 1
+          });
 
-              affiliations.forEach(function(element, index) {
-                  msNavigationService.saveItem('affiliations.department-' + index, {
-                      title: element.title,
-                      state: 'app.department',
-                      weight: 1,
-                      stateParams: {deptId: element.id},
-                  });
-              });
-            }
-          },
-          function(error) {
+          affiliations.forEach(function(element, index) {
+            msNavigationService.saveItem('affiliations.department-' + index, {
+              title: element.title,
+              state: 'app.department',
+              weight: 1,
+              stateParams: {deptId: element.id},
+            });
+          });
+        }, function(error) {
             console.log(error);
-          }
-        );
-
-
+        });
     }
 
 })();

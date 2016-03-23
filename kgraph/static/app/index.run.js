@@ -36,21 +36,19 @@
         });
 
         // Auth
-        $rootScope.authenticated = undefined;
+        $rootScope.authenticated = false;
         // Init the auth service
         djangoAuth.authenticationStatus(true, false)
             .then(
               function(data) {
                 $rootScope.authenticated = true;
-                djangoAuth.profile().then(function(data) {
-                  $rootScope.user = data;
-                },
+              },
               function(error) {
                 console.log(error);
                 $rootScope.authenticated = false;
               }
             );
-        });
+      
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
           $rootScope.authenticated = false;
@@ -59,10 +57,7 @@
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
           $rootScope.authenticated = true;
-          djangoAuth.profile().then(function(data) {
-            $rootScope.user = data;
-            $state.go('app.dashboards_student', {}, {reload: true});
-          });
+          $state.go('app.dashboards_student');
         });
         // If the user attempts to access a restricted page, redirect them back to the main page.
         $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection){

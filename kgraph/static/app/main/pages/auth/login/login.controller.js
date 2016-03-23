@@ -27,6 +27,7 @@
           .then(
             function (data) {
               // success
+              console.log(data);
               vm.authenticated = true;
             },
             function (error) {
