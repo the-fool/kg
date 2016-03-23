@@ -23,16 +23,20 @@
                 {
                     return msApi.resolve('dashboard.student@get');
                 },
-                Profile: function($q, djangoAuth)
+                Profile: function(djangoAuth, $state)
                 {
                   return djangoAuth
                     .authenticationStatus(true, false)
-                    .then(function(data) {
-                      console.log('resolved', data);
-                      return data;
-                    }, function() {
-                      return undefined;
-                    });
+                    .then(
+                      function(data) {
+                        console.log('resolved', data);
+                        return data;
+                      },
+                      function(error) {
+                        console.log(error)
+                        $state.go('app.pages_auth_login');
+                      }
+                    );
                 },
             },
             bodyClass: 'dashboard-student'

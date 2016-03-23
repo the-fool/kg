@@ -36,13 +36,20 @@
         });
 
         // Auth
-        $rootScope.authenticated = false;
+        $rootScope.authenticated = undefined;
         // Init the auth service
-        djangoAuth.authenticationStatus(true, false).then(function(data) {
-          $rootScope.authenticated = true;
-          djangoAuth.profile().then(function(data) {
-            $rootScope.user = data;
-          });
+        djangoAuth.authenticationStatus(true, false)
+            .then(
+              function(data) {
+                $rootScope.authenticated = true;
+                djangoAuth.profile().then(function(data) {
+                  $rootScope.user = data;
+                },
+              function(error) {
+                console.log(error);
+                $rootScope.authenticated = false;
+              }
+            );
         });
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {

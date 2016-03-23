@@ -180,7 +180,7 @@
         // Set force to true to ignore stored value and query API
         restrict = restrict || false;
         force = force || false;
-        if(this.user === null || this.authPromise == null || force){
+        if(this.authPromise == null || force){
           this.authPromise = this.request({
             'method': "GET",
             'url': "/user/"
