@@ -4,7 +4,8 @@
 
     angular
         .module('app.department', [])
-        .config(config).run(runBlock);
+        .config(config)
+        .run(runBlock);
 
     /** @ngInject */
     function config($stateProvider, msApiProvider, msNavigationServiceProvider)
@@ -37,24 +38,54 @@
     }
 
     /** @ngInject */
-    function runBlock(djangoAuth, msNavigationService) {
+    function runBlock(djangoAuth, msNavigationService, $rootScope) {
+      // Affiliations must live beyond the execution time of this function
+      var affiliations;
 
-      /** Set the appropriate department affiliations in quick-nav for a user */
-      djangoAuth
+      msNavigationService.saveItem('affiliations', {
+        title : 'MY SCHOOLS',
+        icon  : 'icon-tile-four',
+        weight: 1,
+        hidden : function()
+        {
+          return djangoAuth.authenticated === null ? false : djangoAuth.authenticated;
+        }
+      });
+
+      /* * * * * * * * * * * *
+      /                                                                 /
+      /  Set the appropriate department affiliations in nav for a user  /
+      /                                                                */
+
+      addAffiliations();
+
+      // Add affiliations on login
+      $rootScope.$on('djangoAuth.logged_in', function()
+      {
+        addAffiliations();
+      });
+
+      // Remove affiliations on logout
+      $rootScope.$on('djangoAuth.logged_out', function()
+      {
+        affiliations.forEach(function(element, index)
+        {
+          msNavigationService.deleteItem('affiliations.department-' + index);
+        });
+      });
+
+      // Get user data, and add affiliations
+      function addAffiliations() {
+        djangoAuth
         .authenticationStatus(true)
         .then(function()
         {
-            return djangoAuth.profile();
+          return djangoAuth.profile();
         })
         .then(function(data)
         {
           // Add user's personal affiliations to navigation
-          var affiliations = data.affiliations ? data.affiliations : [];
-          msNavigationService.saveItem('affiliations', {
-            title : 'MY SCHOOLS',
-            icon  : 'icon-tile-four',
-            weight: 1
-          });
+          affiliations = data.affiliations ? data.affiliations : [];
 
           affiliations.forEach(function(element, index) {
             msNavigationService.saveItem('affiliations.department-' + index, {
@@ -64,9 +95,11 @@
               stateParams: {deptId: element.id},
             });
           });
-        }, function(error) {
-            console.log(error);
+        },function(error) {
+          console.log(error);
         });
+      }
+
     }
 
 })();

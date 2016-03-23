@@ -7,7 +7,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $timeout, $state, djangoAuth)
+    function runBlock($rootScope, $timeout, $state, $window, djangoAuth)
     {
 
         // Activate loading indicator
@@ -52,12 +52,12 @@
         // Wait and respond to the logout event.
         $rootScope.$on('djangoAuth.logged_out', function() {
           $rootScope.authenticated = false;
-          $state.go('app.pages_auth_login');
+          $state.go('app.pages_auth_login', {}, {reload: true});
         });
         // Wait and respond to the log in event.
         $rootScope.$on('djangoAuth.logged_in', function() {
           $rootScope.authenticated = true;
-          $state.go('app.dashboards_student');
+          $state.go('app.dashboards_student', {}, {reload: true});
         });
         // If the user attempts to access a restricted page, redirect them back to the main page.
         $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection){
