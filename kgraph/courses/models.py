@@ -1,6 +1,7 @@
 import uuid
-from django.db import models
 
+from django.db import models
+from kgraph.core.exceptions import CircularDependency
 from ..departments.models import Department
 
 def get_default_department():
@@ -25,4 +26,17 @@ class Edge(models.Model):
 
     #Override
     def save(self, *args, **kwargs):
+        if self.is_circular():
+            raise CircularDependency
         super(Edge, self).save(*args, **kwargs)
+
+    def is_circular(self):
+        return self.edge_chase(start_node=self.whence)
+
+    def edge_chase(self, start_node=None):
+        for edge in self.whither.fore.all():
+            if edge.whither == start_node:
+                return True
+            else:
+                return edge.edge_chase(start_node=start_node)
+        return False

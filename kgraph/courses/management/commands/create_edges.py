@@ -31,11 +31,11 @@ class Command(BaseCommand):
                         k = random.randint(0, i_range)
                     try:
                         with transaction.atomic():
-                            Edge.objects.create(whence=courses[k], whither=c)
+                            Edge.objects.create(whence=c, whither=courses[k])
                             j += 1
                     except IntegrityError:
-                        # probably a unique key violation, roll back
-                        print(i, k)
+                        """probably a unique key violation, roll back"""
                         j -= 1
                     except CircularDependency:
+                        """ Raised in the model's save() """
                         j -= 1

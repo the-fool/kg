@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
         departments = list(Department.objects.all())
         courses = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight']
+        
         for d in departments:
             for c1 in courses:
                 for c2 in courses:
