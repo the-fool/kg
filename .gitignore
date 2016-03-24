@@ -69,3 +69,4 @@ mailhog
 
 # Gulp dev builds
 .tmp/
+dist/
