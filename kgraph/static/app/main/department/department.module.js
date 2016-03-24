@@ -8,7 +8,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function config($stateProvider, msApiProvider, msNavigationServiceProvider)
+    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.department', {
@@ -32,10 +32,14 @@
             bodyClass: 'app-department'
         });
 
+        // Translation
+        $translatePartialLoaderProvider.addPart('static/app/main/department');
+
         // Api
         msApiProvider.register('app.department', ['api/v1/departments/:id/']);
         msApiProvider.register('app.department-courses', ['api/v1/departments/:id/courses/']);
     }
+
 
     /** @ngInject */
     function runBlock(djangoAuth, msNavigationService, $rootScope) {

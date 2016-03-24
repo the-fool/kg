@@ -10,7 +10,8 @@
 	function DepartmentController($stateParams, DepartmentDetailData, DepartmentCoursesData) {
 		var vm = this;
 
-		vm.welcomeText = "welcome to department " + DepartmentDetailData.title;
+		vm.department = DepartmentDetailData;
+
 		vm.graphData = wrangleCourseData(DepartmentCoursesData.results);
 
 		/* Convert result from API call into D3 friendly format */

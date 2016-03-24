@@ -1,3 +1,61 @@
-<h2>{{vm.welcomeText}}</h2>
-<h3>{{vm.data}}</h3>
-<courses-graph graph-data="vm.graphData"></courses-graph>
+<div id="department" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="">
+
+            <div class="name">{{vm.department.title}}</div>
+        </div>
+
+        <div class="actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" aria-label="Follow" translate="DEPARTMENT.FOLLOW"
+                       translate-attr-aria-label="DEPARTMENT.FOLLOW">Follow
+            </md-button>
+            <md-button class="md-raised md-primary" translate="DEPARTMENT.SEND_MESSAGE"
+                       translate-attr-aria-label="DEPARTMENT.SEND_MESSAGE">Message
+            </md-button>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span translate="DEPARTMENT.COURSE_LISTING">Course Listing</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="listing-tab"
+                                ng-include="'static/app/main/department/tabs/listing/listing.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <span translate="DEPARTMENT.COURSE_GRAPH">Course Graph</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="graph-tab"
+                                ng-include="'static/app/main/department/tabs/graph/graph.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <span translate="DEPARTMENT.TEAM_MEMBERS">Team Members</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="team-tab"
+                                ng-include="'static/app/main/department/tabs/team/team.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

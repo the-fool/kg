@@ -1,0 +1,9 @@
+{
+  "DEPARTMENT": {
+    "SEND_MESSAGE": "Send Message",
+    "FOLLOW" : "Follow",
+    "COURSE_LISTING":"Course Listing",
+    "COURSE_GRAPH":"Course Graph",
+    "TEAM_MEMBERS" : "Team Members"
+  }
+}
