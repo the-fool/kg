@@ -21,4 +21,8 @@ class Edge(models.Model):
     whither = models.ForeignKey(Course, null=True, on_delete=models.CASCADE, related_name="aft")
 
     class Meta:
-        unique_together = ('whence', 'whither')
+        unique_together = (('whence', 'whither'),)
+
+    #Override
+    def save(self, *args, **kwargs):
+        super(Edge, self).save(*args, **kwargs)

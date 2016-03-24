@@ -26,7 +26,7 @@
     function link(scope, element, attrs, controller) {
       console.log(controller.data);
       var margin = {top: 10, right: 10, bottom: 10, left: 10};
-      var w = 1000, h = 400;
+      var w = 1000, h = 800;
       var width = w - margin.left - margin.right;
       var height = h - margin.top - margin.bottom;
       var el = d3.select(element[0])
