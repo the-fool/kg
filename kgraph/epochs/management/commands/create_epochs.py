@@ -4,7 +4,7 @@ import datetime
 from django.db import IntegrityError, transaction
 from django.core.management.base import BaseCommand
 
-from kgraph.department.models import Department
+from kgraph.departments.models import Department
 from kgraph.epochs.models import Epoch
 
 class Command(BaseCommand):

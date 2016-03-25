@@ -18,4 +18,4 @@ class Epoch(models.Model):
         today = datetime.date.today()
         if self.start_date <= today and self.end_date > today:
             self.active = True
-        super(Edge, self).save(*args, **kwargs)
+        super(Epoch, self).save(*args, **kwargs)
