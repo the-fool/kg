@@ -49,6 +49,7 @@ LOCAL_APPS = (
     'kgraph.users',  # custom users app
     'kgraph.departments',
     'kgraph.courses',
+    'kgraph.epochs'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
