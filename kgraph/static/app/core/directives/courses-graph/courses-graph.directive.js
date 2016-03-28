@@ -52,7 +52,9 @@
       });
 
       controller.data.edges.forEach(function(edge) {
-        g.setEdge(edge.from, edge.to, {label:''});
+        g.setEdge(edge.from, edge.to, {
+          label:'', lineInterpolate: 'basis'
+        });
       });
 
       var render = new dagreD3.render();
