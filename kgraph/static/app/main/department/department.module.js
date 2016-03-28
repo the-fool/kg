@@ -52,7 +52,8 @@
         weight: 1,
         hidden : function()
         {
-          return djangoAuth.authenticated === null ? false : djangoAuth.authenticated;
+          console.log(djangoAuth.authenticated);
+          return djangoAuth.authenticated === null ? false : !djangoAuth.authenticated;
         }
       });
 
