@@ -11,7 +11,9 @@
     return {
       restrict: 'E',
       replace: false,
-      scope: {data: '=graphData'},
+      scope: {
+        data: '=graphData'
+      },
       link: link,
       controller: ctrl,
       controllerAs: 'vm',
@@ -48,19 +50,23 @@
       controller.data.nodes.forEach(function(node) {
         g.setNode(node.id, {label: node.label});
       });
+
       controller.data.edges.forEach(function(edge) {
-        g.setEdge(edge.from, edge.to, {label: 'edge'});
+        g.setEdge(edge.from, edge.to, {label:''});
       });
 
       var render = new dagreD3.render();
+
       var zoom = d3.behavior.zoom().on("zoom", function() {
         inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
       });
+
       svg.call(zoom);
 
       render(inner, g);
 
       var initialScale = 0.75;
+
       zoom
         .translate([(svg.attr("width") - g.graph().width * initialScale) / 2, 20])
         .scale(initialScale)
