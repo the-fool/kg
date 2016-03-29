@@ -10,23 +10,32 @@
 	function DepartmentController($stateParams, $mdSidenav, $rootScope, DepartmentDetailData, DepartmentCoursesData) {
 		var vm = this;
 
+		// Data
+
 		vm.department = DepartmentDetailData;
-		vm.graphData = wrangleCourseData(DepartmentCoursesData.results);
+		vm.graphData = toGraphDataStructure(DepartmentCoursesData.results);
+		vm.courses = DepartmentCoursesData.results;
+
+		// Methods
 
 		vm.openQuickPanel = openQuickPanel;
+
 
 		/**
 		 *  Open quick panel for course info
 		 *
 		 */
-
 		function openQuickPanel(nodeID) {
 			$rootScope.$broadcast('course-selected', nodeID);
 			$mdSidenav('quick-panel').toggle();
 		}
 
-		/* Convert result from API call into D3 friendly format */
-		function wrangleCourseData(apiData) {
+
+		/**
+		 * Convert result from API call into D3 friendly format
+		 *
+		 */
+		function toGraphDataStructure(apiData) {
 			// list of course objects
 			var data = apiData;
 			var ret  = {nodes:[], edges:[]};
