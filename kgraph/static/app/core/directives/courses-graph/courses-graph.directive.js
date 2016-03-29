@@ -12,7 +12,8 @@
       restrict: 'E',
       replace: false,
       scope: {
-        data: '=graphData'
+        data: '=graphData',
+        onClick: '&'
       },
       link: link,
       controller: ctrl,
@@ -27,6 +28,7 @@
 
     function link(scope, element, attrs, controller) {
       console.log(controller.data);
+      console.log(scope.vm.onClick);
       var margin = {top: 10, right: 10, bottom: 10, left: 10};
       var w = 1000, h = 800;
       var width = w - margin.left - margin.right;
@@ -79,7 +81,8 @@
       inner
         .selectAll("g.node")
         .on("click", function(nodeID) {
-          console.log(nodeID);
+          console.log(scope.vm.onClick);
+          scope.vm.onClick({nodeID: nodeID});
         })
         .on('mouseover', mouseOver)
         .on('mouseout', mouseOut);

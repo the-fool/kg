@@ -11,8 +11,13 @@
 		var vm = this;
 
 		vm.department = DepartmentDetailData;
-
 		vm.graphData = wrangleCourseData(DepartmentCoursesData.results);
+
+		vm.openQuickPanel = openQuickPanel;
+
+		function openQuickPanel(nodeID) {
+			console.log(nodeID);
+		}
 
 		/* Convert result from API call into D3 friendly format */
 		function wrangleCourseData(apiData) {
