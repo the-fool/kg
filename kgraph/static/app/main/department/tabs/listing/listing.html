@@ -1,10 +1,11 @@
-<div layout="column" flex layout-fill ng-cloak>
+<div id="listing-tab" layout="column" flex layout-fill ng-cloak>
 
-  <md-content style="height: 600px;" md-theme="altTheme" ms-scroll>
+  <md-content style="height: 600px;" ms-scroll>
     <section>
       <md-subheader class="md-primary">Level 1</md-subheader>
       <md-list layout-padding>
-        <md-list-item class="md-3-line" ng-repeat="course in vm.courses">
+        <md-list-item class="md-2-line" ng-repeat="course in vm.courses"
+          ng-click="vm.openQuickPanel(course.id)">
             <div class="md-list-item-text">
               <h3>{{course.title}}</h3>
               <h4>{{course.course_num}}</h4>

@@ -25,8 +25,8 @@
 		 *  Open quick panel for course info
 		 *
 		 */
-		function openQuickPanel(nodeID) {
-			$rootScope.$broadcast('course-selected', nodeID);
+		function openQuickPanel(courseID) {
+			$rootScope.$broadcast('course-selected', courseID);
 			$mdSidenav('quick-panel').toggle();
 		}
 
