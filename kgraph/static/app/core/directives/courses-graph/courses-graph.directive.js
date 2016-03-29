@@ -32,18 +32,19 @@
       var width = w - margin.left - margin.right;
       var height = h - margin.top - margin.bottom;
       var el = d3.select(element[0])
-      .append('svg')
-      .attr({
-        'width': w,
-        'height': h
-      })
-      .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-      .attr('id', 'mainGroup');
+                 .append('svg')
+                 .attr({
+                   'width': w,
+                   'height': h
+                 })
+                 .append('g')
+                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                 .attr('id', 'mainGroup');
 
       var g = new dagre.graphlib.Graph().setGraph({
         rankdir: "LR"
       });
+
       var svg = d3.select(element[0]).select('svg');
       var inner = svg.select("g");
 
@@ -59,14 +60,36 @@
 
       var render = new dagreD3.render();
 
+      /*
+        Special plugins
+                          */
       var zoom = d3.behavior.zoom().on("zoom", function() {
         inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
       });
 
+
+      /*
+        Plugin invocations
+
+                    */
       svg.call(zoom);
 
       render(inner, g);
+      // listeners
+      inner
+        .selectAll("g.node")
+        .on("click", function(nodeID) {
+          console.log(nodeID);
+        })
+        .on('mouseover', mouseOver)
+        .on('mouseout', mouseOut);
 
+      function mouseOver(d) {
+        d3.select(this).classed('hovered', true);
+      }
+      function mouseOut(d) {
+        d3.select(this).classed('hovered', false);
+      }
       var initialScale = 0.75;
 
       zoom
