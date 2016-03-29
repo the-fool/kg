@@ -7,7 +7,7 @@
         .controller('QuickPanelController', QuickPanelController);
 
     /** @ngInject */
-    function QuickPanelController(msApi)
+    function QuickPanelController($rootScope, msApi)
     {
         var vm = this;
 
@@ -18,6 +18,20 @@
             cloud : false,
             retro : true
         };
+
+
+        // When a specific course is selected, $rootScope broadcasts
+        $rootScope.$on('course-selected', function(event, courseID) {
+          console.log('ajaxing', courseID);
+          msApi.request('quickPanel.course-detail@get', {id: courseID},
+              // Success
+              function (response)
+              {
+                console.log(response);
+                vm.course = response;
+              }
+          );
+        });
 
         msApi.request('quickPanel.activities@get', {},
             // Success

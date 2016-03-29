@@ -7,7 +7,7 @@
 		.controller('DepartmentController', DepartmentController);
 
 	/** @ngInject */
-	function DepartmentController($stateParams, DepartmentDetailData, DepartmentCoursesData) {
+	function DepartmentController($stateParams, $mdSidenav, $rootScope, DepartmentDetailData, DepartmentCoursesData) {
 		var vm = this;
 
 		vm.department = DepartmentDetailData;
@@ -15,8 +15,14 @@
 
 		vm.openQuickPanel = openQuickPanel;
 
+		/**
+		 *  Open quick panel for course info
+		 *
+		 */
+
 		function openQuickPanel(nodeID) {
-			console.log(nodeID);
+			$rootScope.$broadcast('course-selected', nodeID);
+			$mdSidenav('quick-panel').toggle();
 		}
 
 		/* Convert result from API call into D3 friendly format */
