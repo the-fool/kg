@@ -47,7 +47,7 @@
       var affiliations;
 
       msNavigationService.saveItem('affiliations', {
-        title : 'MY SCHOOLS',
+        title : 'My Schools',
         icon  : 'icon-tile-four',
         weight: 1,
         hidden : function()

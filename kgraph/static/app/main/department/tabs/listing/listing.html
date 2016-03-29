@@ -1,5 +1,42 @@
 <div id="listing-tab" layout="column" flex layout-fill ng-cloak>
-
+  <md-toolbar ng-show="!showSearch">
+  <div layout="row" layout-align="space-around end" class="md-toolbar-tools">
+      <div>
+      <md-headline>
+        All
+      </md-headline>
+    </div>
+      <div>
+      <md-headline>
+        Current
+      </md-headline>
+    </div>
+      <div>
+      <md-headline>
+        Future
+      </md-headline>
+    </div>
+    <div>
+      <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+        <md-icon md-font-icon="icon-magnify" class="icon s24"></ng-md-icon>
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>
+<md-toolbar class="md-hue-1" ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+      <md-icon md-font-icon="icon-close" class="icon s24"></ng-md-icon>
+    </md-button>
+    <md-input-container flex>
+      <label>&nbsp;</label>
+      <input ng-model="search.who" placeholder="enter search">
+    </md-input-container>
+    <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+      <md-icon md-font-icon="icon-magnify" class="icon s24"></ng-md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
   <md-content style="height: 600px;" ms-scroll>
     <section>
       <md-subheader class="md-primary">Level 1</md-subheader>
@@ -7,7 +44,7 @@
         <md-list-item class="md-2-line" ng-repeat="course in vm.courses"
           ng-click="vm.openQuickPanel(course.id)">
             <div class="md-list-item-text">
-              <h3>{{course.title}}</h3>
+              <md-headline>{{course.title}}</md-headline>
               <h4>{{course.course_num}}</h4>
               <p>
                 {{course.description}}
